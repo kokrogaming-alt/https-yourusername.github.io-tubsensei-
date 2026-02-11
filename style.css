@@ -1,50 +1,72 @@
 body {
   margin:0;
-  font-family: Arial;
-  background:#0f172a;
-  color:white;
+  font-family: Arial, sans-serif;
+  background:#ffffff;
+  color:#0f172a;
 }
 
 header {
   text-align:center;
   padding:20px;
-  background:#020617;
+  background:#f3f4f6;
+  border-bottom:1px solid #d1d5db;
 }
 
 nav a {
   margin:10px;
-  color:#22c55e;
+  color:#3b82f6;
   text-decoration:none;
+  font-weight:bold;
 }
 
 section {
-  margin:20px;
+  margin:20px auto;
   padding:20px;
-  background:#1e293b;
+  background:#f9fafb;
   border-radius:10px;
+  max-width:800px;
+  box-shadow:0 0 10px rgba(0,0,0,0.05);
 }
 
 .plans {
   display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap:15px;
 }
 
 .card {
   padding:15px;
-  border:1px solid #22c55e;
+  border:1px solid #3b82f6;
   border-radius:8px;
+  text-align:center;
+}
+
+.card img {
+  width:100%;
+  border-radius:5px;
+  margin-bottom:10px;
 }
 
 button {
   padding:10px 15px;
-  background:#22c55e;
+  background:#3b82f6;
   border:none;
-  color:black;
+  color:white;
   cursor:pointer;
+  border-radius:5px;
 }
 
 footer {
   text-align:center;
   padding:15px;
-  background:#020617;
+  background:#f3f4f6;
+  border-top:1px solid #d1d5db;
+}
+
+input, select {
+  padding:10px;
+  width:90%;
+  margin:5px 0;
+  border:1px solid #d1d5db;
+  border-radius:5px;
 }
