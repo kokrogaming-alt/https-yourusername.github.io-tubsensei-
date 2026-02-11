@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tub Sensei | Smart Earning Platform</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>Tub Sensei</h1>
+  <p>Smart Growth & Digital Learning Platform</p>
+  <nav>
+    <a href="withdraw.html">Withdrawal</a>
+    <a href="login.html">Admin</a>
+  </nav>
+</header>
+
+<section class="bio">
+  <h2>About Tub Sensei</h2>
+  <p>
+    Tub Sensei is a digital earning education platform where users can
+    explore smart investment strategies and profit estimation tools.
+  </p>
+</section>
+
+<section class="plans">
+  <h2>Investment Plans (Estimated Returns)</h2>
+
+  <div class="card">
+    <h3>Rs 500 Plan</h3>
+    <p>Estimated Daily Return: Rs 160</p>
+  </div>
+
+  <div class="card">
+    <h3>Rs 1000 Plan</h3>
+    <p>Estimated Daily Return: Rs 290</p>
+  </div>
+
+  <div class="card">
+    <h3>Rs 1800 Plan</h3>
+    <p>Estimated Daily Return: Rs 360</p>
+  </div>
+
+  <div class="card">
+    <h3>Rs 2500 Plan</h3>
+    <p>Estimated Daily Return: Rs 400</p>
+  </div>
+
+  <p class="note">
+    *Returns are estimates for educational purposes only.
+  </p>
+</section>
+
+<section>
+  <h2>Profit Calculator (30% Estimate)</h2>
+  <input type="number" id="amount" placeholder="Enter Amount">
+  <button onclick="calc()">Calculate</button>
+  <p id="result"></p>
+</section>
+
+<section>
+  <h2>Payment Methods</h2>
+  <p>EasyPaisa: 03XX-XXXXXXX</p>
+  <p>JazzCash: 03XX-XXXXXXX</p>
+</section>
+
+<footer>
+  <p>© 2026 Tub Sensei | All Rights Reserved</p>
+</footer>
+
+<script>
+function calc(){
+  var amt = document.getElementById("amount").value;
+  var profit = amt * 0.30;
+  document.getElementById("result").innerHTML =
+  "Estimated Profit: Rs " + profit;
+}
+</script>
+
+</body>
+</html>
