@@ -28,23 +28,31 @@
   <h2>Investment Plans (Estimated Returns)</h2>
 
   <div class="card">
+    <img src="plan500.jpg" alt="Rs 500 Plan">
     <h3>Rs 500 Plan</h3>
     <p>Estimated Daily Return: Rs 160</p>
+    <button onclick="buyPlan(500)">Buy Plan</button>
   </div>
 
   <div class="card">
+    <img src="plan1000.jpg" alt="Rs 1000 Plan">
     <h3>Rs 1000 Plan</h3>
     <p>Estimated Daily Return: Rs 290</p>
+    <button onclick="buyPlan(1000)">Buy Plan</button>
   </div>
 
   <div class="card">
+    <img src="plan1800.jpg" alt="Rs 1800 Plan">
     <h3>Rs 1800 Plan</h3>
     <p>Estimated Daily Return: Rs 360</p>
+    <button onclick="buyPlan(1800)">Buy Plan</button>
   </div>
 
   <div class="card">
+    <img src="plan2500.jpg" alt="Rs 2500 Plan">
     <h3>Rs 2500 Plan</h3>
     <p>Estimated Daily Return: Rs 400</p>
+    <button onclick="buyPlan(2500)">Buy Plan</button>
   </div>
 
   <p class="note">
@@ -75,6 +83,24 @@ function calc(){
   var profit = amt * 0.30;
   document.getElementById("result").innerHTML =
   "Estimated Profit: Rs " + profit;
+}
+
+// Demo localStorage for admin balance and users
+function buyPlan(amount){
+  let userName = prompt("Enter Your Name:");
+  if(!userName) return alert("Name required!");
+  
+  // Save user
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  users.push({name:userName, plan:amount, blocked:false});
+  localStorage.setItem("users", JSON.stringify(users));
+  
+  // Add amount to admin balance
+  let balance = parseInt(localStorage.getItem("adminBalance") || "0");
+  balance += parseInt(amount);
+  localStorage.setItem("adminBalance", balance);
+
+  alert("Plan purchased successfully! Admin balance updated.");
 }
 </script>
 
