@@ -2,105 +2,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Tub Sensei | Smart Earning Platform</title>
+<title>Tub Sensei | Packages & Deposit</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header>
+  <img src="logo.png" alt="Tub Sensei Logo" style="width:150px; display:block; margin:auto;">
   <h1>Tub Sensei</h1>
-  <p>Smart Growth & Digital Learning Platform</p>
   <nav>
     <a href="withdraw.html">Withdrawal</a>
-    <a href="login.html">Admin</a>
+    <a href="admin.html">Admin</a>
+    <a href="signup.html">Logout</a>
   </nav>
 </header>
 
-<section class="bio">
-  <h2>About Tub Sensei</h2>
-  <p>
-    Tub Sensei is a digital earning education platform where users can
-    explore smart investment strategies and profit estimation tools.
-  </p>
-</section>
-
 <section class="plans">
-  <h2>Investment Plans (Estimated Returns)</h2>
-
-  <div class="card">
-    <img src="plan500.jpg" alt="Rs 500 Plan">
-    <h3>Rs 500 Plan</h3>
-    <p>Estimated Daily Return: Rs 160</p>
-    <button onclick="buyPlan(500)">Buy Plan</button>
-  </div>
-
-  <div class="card">
-    <img src="plan1000.jpg" alt="Rs 1000 Plan">
-    <h3>Rs 1000 Plan</h3>
-    <p>Estimated Daily Return: Rs 290</p>
-    <button onclick="buyPlan(1000)">Buy Plan</button>
-  </div>
-
-  <div class="card">
-    <img src="plan1800.jpg" alt="Rs 1800 Plan">
-    <h3>Rs 1800 Plan</h3>
-    <p>Estimated Daily Return: Rs 360</p>
-    <button onclick="buyPlan(1800)">Buy Plan</button>
-  </div>
+  <h2>Available Packages</h2>
 
   <div class="card">
     <img src="plan2500.jpg" alt="Rs 2500 Plan">
-    <h3>Rs 2500 Plan</h3>
-    <p>Estimated Daily Return: Rs 400</p>
-    <button onclick="buyPlan(2500)">Buy Plan</button>
+    <h3>Rs 2500</h3>
+    <button onclick="buyPlan(2500)">Deposit & Buy</button>
   </div>
 
-  <p class="note">
-    *Returns are estimates for educational purposes only.
-  </p>
-</section>
+  <div class="card">
+    <img src="plan3500.jpg" alt="Rs 3500 Plan">
+    <h3>Rs 3500</h3>
+    <button onclick="buyPlan(3500)">Deposit & Buy</button>
+  </div>
 
-<section>
-  <h2>Profit Calculator (30% Estimate)</h2>
-  <input type="number" id="amount" placeholder="Enter Amount">
-  <button onclick="calc()">Calculate</button>
-  <p id="result"></p>
-</section>
+  <div class="card">
+    <img src="plan5000.jpg" alt="Rs 5000 Plan">
+    <h3>Rs 5000</h3>
+    <button onclick="buyPlan(5000)">Deposit & Buy</button>
+  </div>
 
-<section>
-  <h2>Payment Methods</h2>
-  <p>EasyPaisa: 03XX-XXXXXXX</p>
-  <p>JazzCash: 03XX-XXXXXXX</p>
-</section>
+  <div class="card">
+    <img src="plan7500.jpg" alt="Rs 7500 Plan">
+    <h3>Rs 7500</h3>
+    <button onclick="buyPlan(7500)">Deposit & Buy</button>
+  </div>
 
-<footer>
-  <p>© 2026 Tub Sensei | All Rights Reserved</p>
-</footer>
+  <p>*Packages up to 1 lakh available on request.</p>
+</section>
 
 <script>
-function calc(){
-  var amt = document.getElementById("amount").value;
-  var profit = amt * 0.30;
-  document.getElementById("result").innerHTML =
-  "Estimated Profit: Rs " + profit;
-}
-
-// Demo localStorage for admin balance and users
 function buyPlan(amount){
-  let userName = prompt("Enter Your Name:");
-  if(!userName) return alert("Name required!");
-  
-  // Save user
+  let user = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  if(!user.name) return alert("Please login first");
+
+  // Assign plan
+  user.plan = amount;
+  localStorage.setItem("currentUser", JSON.stringify(user));
+
+  // Update main users
   let users = JSON.parse(localStorage.getItem("users") || "[]");
-  users.push({name:userName, plan:amount, blocked:false});
-  localStorage.setItem("users", JSON.stringify(users));
-  
-  // Add amount to admin balance
-  let balance = parseInt(localStorage.getItem("adminBalance") || "0");
-  balance += parseInt(amount);
+  let idx = users.findIndex(u=>u.email==user.email);
+  if(idx>=0){ users[idx] = user; localStorage.setItem("users", JSON.stringify(users)); }
+
+  // Admin balance
+  let balance = parseInt(localStorage.getItem("adminBalance") || 0);
+  balance += amount;
   localStorage.setItem("adminBalance", balance);
 
-  alert("Plan purchased successfully! Admin balance updated.");
+  alert(`Deposit of Rs ${amount} successful!`);
 }
 </script>
 
