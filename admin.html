@@ -66,3 +66,11 @@ window.onload = loadAdmin;
 
 </body>
 </html>
+let currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+if(currentUser.email != ADMIN_EMAIL){
+    alert("Access Denied! Only owner can access this page.");
+    window.location="index.html";
+}
+const ADMIN_EMAIL = "youremail@example.com";
+const ADMIN_PASS = "YourStrongPassword123";
+
