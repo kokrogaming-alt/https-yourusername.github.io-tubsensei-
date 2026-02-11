@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Withdrawal Request</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section>
+<h2>Withdrawal Request</h2>
+
+<input type="text" placeholder="Your Name"><br><br>
+<input type="number" placeholder="Amount"><br><br>
+
+<select>
+<option>EasyPaisa</option>
+<option>JazzCash</option>
+</select><br><br>
+
+<input type="text" placeholder="Account Number"><br><br>
+
+<button onclick="msg()">Submit</button>
+<p id="demo"></p>
+
+</section>
+
+<script>
+function msg(){
+document.getElementById("demo").innerHTML =
+"Your request has been sent to admin for review.";
+}
+</script>
+
+</body>
+</html>
