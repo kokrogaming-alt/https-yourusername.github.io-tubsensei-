@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section>
+<h2>Admin Dashboard</h2>
+
+<p><strong>Admin Balance:</strong> Rs <span id="balance">0</span></p>
+
+<h3>Users List</h3>
+<table border="1" width="100%" cellpadding="5">
+<tr><th>Name</th><th>Email</th><th>Plan</th><th>Status</th><th>Action</th></tr>
+<tbody id="userList"></tbody>
+</table>
+
+<h3>Website Control</h3>
+<button onclick="toggleSite()">Ban / Unban Website</button>
+<p id="siteStatus"></p>
+
+</section>
+
+<script>
+// Load admin data
+function loadAdmin(){
+  let balance = localStorage.getItem("adminBalance") || 0;
+  document.getElementById("balance").innerText = balance;
+
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  let tbody = document.getElementById("userList");
+  tbody.innerHTML = "";
+  users.forEach((u,i)=>{
+    let tr = document.createElement("tr");
+    tr.innerHTML = `<td>${u.name}</td>
+                    <td>${u.email}</td>
+                    <td>${u.plan}</td>
+                    <td>${u.blocked ? "Blocked" : "Active"}</td>
+                    <td><button onclick="toggleBlock(${i})">${u.blocked?"Unblock":"Block"}</button></td>`;
+    tbody.appendChild(tr);
+  });
+
+  let status = localStorage.getItem("siteBan") || "Active";
+  document.getElementById("siteStatus").innerText = "Website Status: " + status;
+}
+
+function toggleBlock(i){
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  users[i].blocked = !users[i].blocked;
+  localStorage.setItem("users", JSON.stringify(users));
+  loadAdmin();
+}
+
+function toggleSite(){
+  let status = localStorage.getItem("siteBan") || "Active";
+  status = (status=="Active") ? "Banned" : "Active";
+  localStorage.setItem("siteBan", status);
+  loadAdmin();
+}
+
+window.onload = loadAdmin;
+</script>
+
+</body>
+</html>
