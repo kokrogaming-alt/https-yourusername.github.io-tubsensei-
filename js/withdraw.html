@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Withdrawal Request</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section>
+<h2>Withdrawal Request</h2>
+
+<input type="text" id="wname" placeholder="Your Name"><br><br>
+<input type="number" id="wamount" placeholder="Amount"><br><br>
+
+<select id="wmethod">
+<option>EasyPaisa</option>
+<option>JazzCash</option>
+</select><br><br>
+
+<input type="text" id="waccount" placeholder="Account Number"><br><br>
+
+<button onclick="msg()">Submit</button>
+<p id="demo"></p>
+
+</section>
+
+<script>
+function msg(){
+  let name = document.getElementById("wname").value;
+  let amt = parseInt(document.getElementById("wamount").value);
+  let method = document.getElementById("wmethod").value;
+  let acc = document.getElementById("waccount").value;
+
+  if(!name || !amt || !acc) return alert("All fields required!");
+  if(amt < 500) return alert("Minimum withdrawal is Rs 500");
+
+  let last = JSON.parse(localStorage.getItem("lastWithdraw") || "{}");
+  let today = new Date().toDateString();
+  if(last[name] == today) return alert("Only 1 withdrawal per day allowed");
+
+  last[name] = today;
+  localStorage.setItem("lastWithdraw", JSON.stringify(last));
+
+  document.getElementById("demo").innerHTML =
+  `Hi ${name}, your Rs ${amt} withdrawal via ${method} has been sent to admin for review.`;
+}
+</script>
+
+</body>
+</html>
