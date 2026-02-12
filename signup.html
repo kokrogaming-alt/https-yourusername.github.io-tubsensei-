@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Signup / Login | Tub Sensei</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section>
+<h2>Tub Sensei Signup / Login</h2>
+
+<div id="signupForm">
+  <input type="text" id="sname" placeholder="Full Name"><br><br>
+  <input type="email" id="semail" placeholder="Email"><br><br>
+  <input type="tel" id="sphone" placeholder="Phone (+Country Code)"><br><br>
+  <input type="password" id="spass" placeholder="Password"><br><br>
+  <button onclick="signup()">Sign Up</button><br><br>
+  <button onclick="googleLogin()">Sign Up with Google</button>
+</div>
+
+<div id="loginForm" style="margin-top:20px;">
+  <h3>Already have account?</h3>
+  <input type="email" id="lemail" placeholder="Email"><br><br>
+  <input type="password" id="lpass" placeholder="Password"><br><br>
+  <button onclick="login()">Login</button>
+</div>
+
+<p id="msg"></p>
+
+</section>
+
+<script>
+function signup(){
+  let name = document.getElementById("sname").value;
+  let email = document.getElementById("semail").value;
+  let phone = document.getElementById("sphone").value;
+  let pass = document.getElementById("spass").value;
+
+  if(!name || !email || !phone || !pass){
+    return alert("All fields required!");
+  }
+
+  let otp = prompt("Enter OTP sent to your phone (demo 1234):");
+  if(otp!="1234") return alert("Wrong OTP");
+
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  if(users.find(u=>u.email==email)) return alert("Email already exists!");
+
+  users.push({name,email,phone,pass,blocked:false,plan:0});
+  localStorage.setItem("users", JSON.stringify(users));
+  alert("Signup successful! Please login.");
+}
+
+function googleLogin(){
+  alert("Google login demo activated (real OAuth needs backend)");
+}
+
+function login(){
+  let email = document.getElementById("lemail").value;
+  let pass = document.getElementById("lpass").value;
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+
+  let user = users.find(u=>u.email==email && u.pass==pass);
+  if(!user) return alert("Wrong credentials or blocked");
+  if(user.blocked) return alert("Your account is blocked");
+
+  localStorage.setItem("currentUser", JSON.stringify(user));
+  alert("Login successful! Redirecting to dashboard...");
+  window.location="index.html";
+}
+</script>
+
+</body>
+</html>
