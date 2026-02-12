@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section>
+<h2>Admin Login</h2>
+
+<input type="email" id="adminEmail" placeholder="Email"><br><br>
+<input type="password" id="adminPass" placeholder="Password"><br><br>
+
+<button onclick="adminLogin()">Login</button>
+
+</section>
+
+<script>
+const ADMIN_EMAIL = "youremail@example.com";
+const ADMIN_PASS = "YourStrongPassword123";
+
+function adminLogin(){
+  let email = document.getElementById("adminEmail").value;
+  let pass = document.getElementById("adminPass").value;
+
+  if(email===ADMIN_EMAIL && pass===ADMIN_PASS){
+    window.location="admin.html";
+  } else {
+    alert("Wrong credentials. Only owner can login.");
+  }
+}
+</script>
+
+</body>
+</html>
